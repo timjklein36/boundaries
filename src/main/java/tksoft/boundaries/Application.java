@@ -2,13 +2,14 @@ package tksoft.boundaries;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tksoft.boundaries.icons.ApplicationIcon;
+import tksoft.boundaries.icons.IconUtil;
 
 import javax.swing.*;
+import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
-import static java.awt.BorderLayout.PAGE_START;
 
 /**
  * Main Boundaries application class. The application is started by running
@@ -34,7 +35,7 @@ public class Application extends JFrame implements WindowListener {
         fileOpenMenuItem.setMnemonic(KeyEvent.VK_O);
         fileMenu.add(fileOpenMenuItem);
 
-        JMenuItem exitMenuItem = new JMenuItem("Exit", UIManager.getIcon("FileView.timesIcon"));
+        JMenuItem exitMenuItem = new JMenuItem("Exit", IconUtil.getIcon(ApplicationIcon.EX));
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
@@ -46,7 +47,7 @@ public class Application extends JFrame implements WindowListener {
         JButton boundaryButton = new JButton("Boundary");
         drawToolbar.add(boundaryButton);
 
-        add(drawToolbar, PAGE_START);
+        add(drawToolbar, BorderLayout.PAGE_START);
 
         // Log some system information
         String hostName = "UNKNOWN_HOST";
