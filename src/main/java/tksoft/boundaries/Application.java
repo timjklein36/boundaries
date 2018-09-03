@@ -4,11 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import static java.awt.BorderLayout.PAGE_START;
+
+/**
+ * Main Boundaries application class. The application is started by running
+ * <code>Application.main()</code>.
+ */
 public class Application extends JFrame implements WindowListener {
 
     private static Application window = new Application("Boundaries");
@@ -20,15 +25,28 @@ public class Application extends JFrame implements WindowListener {
 
         // Initialize main window components
         JMenuBar menuBar = new JMenuBar();
+
         JMenu fileMenu = new JMenu("File");
+        fileMenu.setMnemonic(KeyEvent.VK_F);
 
         JMenuItem fileOpenMenuItem = new JMenuItem("Open", UIManager.getIcon("FileView.directoryIcon"));
-
+        fileOpenMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        fileOpenMenuItem.setMnemonic(KeyEvent.VK_O);
         fileMenu.add(fileOpenMenuItem);
+
+        JMenuItem exitMenuItem = new JMenuItem("Exit", UIManager.getIcon("FileView.timesIcon"));
+        fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
 
-        add(menuBar);
+        setJMenuBar(menuBar);
+
+        JToolBar drawToolbar = new JToolBar("Draw");
+
+        JButton boundaryButton = new JButton("Boundary");
+        drawToolbar.add(boundaryButton);
+
+        add(drawToolbar, PAGE_START);
 
         // Log some system information
         String hostName = "UNKNOWN_HOST";
@@ -58,6 +76,7 @@ public class Application extends JFrame implements WindowListener {
     @Override
     public void windowClosing(WindowEvent windowEvent) {
         if (confirmExit() == JOptionPane.YES_OPTION) {
+            logger.info("Application exited by user");
             System.exit(0);
         }
     }
