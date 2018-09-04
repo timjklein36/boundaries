@@ -30,12 +30,20 @@ public class Application extends JFrame implements WindowListener {
         JMenu fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
 
-        JMenuItem fileOpenMenuItem = new JMenuItem("Open", UIManager.getIcon("FileView.directoryIcon"));
+        JMenuItem fileOpenMenuItem = new JMenuItem("Open", IconUtil.getIcon(ApplicationIcon.FOLDER));
         fileOpenMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         fileOpenMenuItem.setMnemonic(KeyEvent.VK_O);
         fileMenu.add(fileOpenMenuItem);
 
-        JMenuItem exitMenuItem = new JMenuItem("Exit", IconUtil.getIcon(ApplicationIcon.EX));
+        JMenuItem fileSaveMenuItem = new JMenuItem("Save", IconUtil.getIcon(ApplicationIcon.FLOPPY));
+        fileSaveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+        fileSaveMenuItem.setMnemonic(KeyEvent.VK_S);
+        fileMenu.add(fileSaveMenuItem);
+
+        JMenuItem fileSaveAsMenuItem = new JMenuItem("Save as...");
+        fileMenu.add(fileSaveAsMenuItem);
+
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
@@ -44,7 +52,7 @@ public class Application extends JFrame implements WindowListener {
 
         JToolBar drawToolbar = new JToolBar("Draw");
 
-        JButton boundaryButton = new JButton("Boundary");
+        JButton boundaryButton = new JButton(IconUtil.getIcon(ApplicationIcon.ACCESSORIES));
         drawToolbar.add(boundaryButton);
 
         add(drawToolbar, BorderLayout.PAGE_START);

@@ -6,7 +6,8 @@ import java.util.Map;
 import static tksoft.boundaries.config.ConfigConstants.ICON_DIR;
 
 public enum ApplicationIcon {
-    EX(ICON_DIR + "status/dialog-error.png"),
+    ACCESSORIES(ICON_DIR + "categories/applications-accessories.png"),
+    FLOPPY(ICON_DIR + "places/media-floppy.png"),
     FOLDER(ICON_DIR + "places/folder.png");
 
     private String path;
