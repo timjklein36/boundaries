@@ -12,14 +12,14 @@ public class ExitAction extends AbstractAction {
 
     private static Logger logger = LoggerFactory.getLogger(ExitAction.class);
 
-    public ExitAction(String name, Component parent) {
+    ExitAction(String name, Component parent) {
         super(name);
         this.parent = parent;
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        logger.debug("ActionEvent from ExitAction: {}", actionEvent);
+        logger.debug("Action performed: {}", actionEvent);
 
         if (confirmExit() == JOptionPane.YES_OPTION) {
             logger.info("Application exited by user");

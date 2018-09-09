@@ -3,9 +3,8 @@ package tksoft.boundaries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tksoft.boundaries.actions.Actions;
+import tksoft.boundaries.components.DrawToolBar;
 import tksoft.boundaries.components.MainMenuBar;
-import tksoft.boundaries.icons.ApplicationIcon;
-import tksoft.boundaries.icons.IconUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,12 +30,7 @@ public class Application extends JFrame implements WindowListener {
         // Initialize main window components
         setJMenuBar(new MainMenuBar(actions));
 
-        JToolBar drawToolbar = new JToolBar("Draw");
-
-        JButton boundaryButton = new JButton(IconUtil.getIcon(ApplicationIcon.ACCESSORIES));
-        drawToolbar.add(boundaryButton);
-
-        add(drawToolbar, BorderLayout.PAGE_START);
+        add(new DrawToolBar(), BorderLayout.PAGE_START);
 
         // Log some system information
         String hostName = "UNKNOWN_HOST";
