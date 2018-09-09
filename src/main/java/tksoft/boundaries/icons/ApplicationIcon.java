@@ -1,14 +1,14 @@
 package tksoft.boundaries.icons;
 
+import tksoft.boundaries.config.Config;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import static tksoft.boundaries.config.ConfigConstants.ICON_DIR;
-
 public enum ApplicationIcon {
-    ACCESSORIES(ICON_DIR + "categories/applications-accessories.png"),
-    FLOPPY(ICON_DIR + "places/media-floppy.png"),
-    FOLDER(ICON_DIR + "places/folder.png");
+    ACCESSORIES("categories/applications-accessories.png"),
+    FLOPPY("places/media-floppy.png"),
+    FOLDER("places/folder.png");
 
     private String path;
 
@@ -21,7 +21,7 @@ public enum ApplicationIcon {
     }
 
     ApplicationIcon(String path) {
-        this.path = path;
+        this.path = Config.getConfig().getIconDir() + path;
     }
 
     public String getPath() {

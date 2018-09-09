@@ -19,12 +19,12 @@ public class OpenFileAction implements Action {
 
     @Override
     public void setEnabled(boolean b) {
-
+        enabled = b;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 
     @Override

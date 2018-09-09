@@ -2,6 +2,7 @@ package tksoft.boundaries;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tksoft.boundaries.actions.ExitAction;
 import tksoft.boundaries.icons.ApplicationIcon;
 import tksoft.boundaries.icons.IconUtil;
 
@@ -20,6 +21,8 @@ public class Application extends JFrame implements WindowListener {
     private static Application window = new Application("Boundaries");
 
     private static Logger logger = LoggerFactory.getLogger(Application.class);
+
+    private Action exitAction = new ExitAction("Exit application", this);
 
     private void init() {
         addWindowListener(this); // Adds the window listener that is implemented in this very class
@@ -44,6 +47,7 @@ public class Application extends JFrame implements WindowListener {
         fileMenu.add(fileSaveAsMenuItem);
 
         JMenuItem exitMenuItem = new JMenuItem("Exit");
+        exitMenuItem.setAction(exitAction);
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
@@ -70,24 +74,12 @@ public class Application extends JFrame implements WindowListener {
         logger.info("Application Initialized: {}@{}", userName, hostName);
     }
 
-    private int confirmExit() {
-        return JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure you want to exit?",
-                "Exit?",
-                JOptionPane.YES_NO_OPTION
-        );
-    }
-
     @Override
     public void windowOpened(WindowEvent windowEvent) {}
 
     @Override
     public void windowClosing(WindowEvent windowEvent) {
-        if (confirmExit() == JOptionPane.YES_OPTION) {
-            logger.info("Application exited by user");
-            System.exit(0);
-        }
+        exitAction.actionPerformed(null);
     }
 
     @Override
