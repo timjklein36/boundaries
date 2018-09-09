@@ -16,16 +16,18 @@ import java.net.UnknownHostException;
  * Main Boundaries application class. The application is started by running
  * <code>Application.main()</code>.
  */
-public class Application extends JFrame implements WindowListener {
+public class Application extends JFrame {
 
     private static Application window = new Application("Boundaries");
 
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
+    private WindowListener windowListener = new ApplicationWindowListener();
+
     private Actions actions = new Actions(this);
 
     private void init() {
-        addWindowListener(this); // Adds the window listener that is implemented in this very class
+        addWindowListener(windowListener); // Adds the window listener that is implemented in this very class
 
         // Initialize main window components
         setJMenuBar(new MainMenuBar(actions));
@@ -45,35 +47,6 @@ public class Application extends JFrame implements WindowListener {
         logger.info("Application Initialized: {}@{}", userName, hostName);
     }
 
-    @Override
-    public void windowOpened(WindowEvent windowEvent) {}
-
-    @Override
-    public void windowClosing(WindowEvent windowEvent) {
-        actions.EXIT.actionPerformed(new ActionEvent(
-                windowEvent.getSource(),
-                ActionEvent.ACTION_PERFORMED,
-                windowEvent.toString(),
-                System.currentTimeMillis(),
-                InputEvent.BUTTON1_MASK
-        ));
-    }
-
-    @Override
-    public void windowClosed(WindowEvent windowEvent) {}
-
-    @Override
-    public void windowIconified(WindowEvent windowEvent) {}
-
-    @Override
-    public void windowDeiconified(WindowEvent windowEvent) {}
-
-    @Override
-    public void windowActivated(WindowEvent windowEvent) {}
-
-    @Override
-    public void windowDeactivated(WindowEvent windowEvent) {}
-
     private Application(String windowName) {
         super(windowName);
     }
@@ -87,5 +60,18 @@ public class Application extends JFrame implements WindowListener {
         window.init();
         window.pack();
         window.setVisible(true);
+    }
+
+    private class ApplicationWindowListener extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent windowEvent) {
+            actions.EXIT.actionPerformed(new ActionEvent(
+                    windowEvent.getSource(),
+                    ActionEvent.ACTION_PERFORMED,
+                    windowEvent.toString(),
+                    System.currentTimeMillis(),
+                    InputEvent.BUTTON1_MASK
+            ));
+        }
     }
 }
