@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 public class ExitAction extends AbstractAction {
     private Component parent;
 
-    private Logger logger = LoggerFactory.getLogger(ExitAction.class);
+    private static Logger logger = LoggerFactory.getLogger(ExitAction.class);
 
     public ExitAction(String name, Component parent) {
         super(name);

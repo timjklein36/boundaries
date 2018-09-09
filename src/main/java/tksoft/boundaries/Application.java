@@ -2,12 +2,13 @@ package tksoft.boundaries;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tksoft.boundaries.actions.ExitAction;
+import tksoft.boundaries.actions.Actions;
+import tksoft.boundaries.components.MainMenuBar;
 import tksoft.boundaries.icons.ApplicationIcon;
 import tksoft.boundaries.icons.IconUtil;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -22,37 +23,13 @@ public class Application extends JFrame implements WindowListener {
 
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
-    private Action exitAction = new ExitAction("Exit application", this);
+    private Actions actions = new Actions(this);
 
     private void init() {
         addWindowListener(this); // Adds the window listener that is implemented in this very class
 
         // Initialize main window components
-        JMenuBar menuBar = new JMenuBar();
-
-        JMenu fileMenu = new JMenu("File");
-        fileMenu.setMnemonic(KeyEvent.VK_F);
-
-        JMenuItem fileOpenMenuItem = new JMenuItem("Open", IconUtil.getIcon(ApplicationIcon.FOLDER));
-        fileOpenMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        fileOpenMenuItem.setMnemonic(KeyEvent.VK_O);
-        fileMenu.add(fileOpenMenuItem);
-
-        JMenuItem fileSaveMenuItem = new JMenuItem("Save", IconUtil.getIcon(ApplicationIcon.FLOPPY));
-        fileSaveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-        fileSaveMenuItem.setMnemonic(KeyEvent.VK_S);
-        fileMenu.add(fileSaveMenuItem);
-
-        JMenuItem fileSaveAsMenuItem = new JMenuItem("Save as...");
-        fileMenu.add(fileSaveAsMenuItem);
-
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        exitMenuItem.setAction(exitAction);
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        setJMenuBar(menuBar);
+        setJMenuBar(new MainMenuBar(actions));
 
         JToolBar drawToolbar = new JToolBar("Draw");
 
@@ -79,7 +56,13 @@ public class Application extends JFrame implements WindowListener {
 
     @Override
     public void windowClosing(WindowEvent windowEvent) {
-        exitAction.actionPerformed(null);
+        actions.EXIT.actionPerformed(new ActionEvent(
+                windowEvent.getSource(),
+                ActionEvent.ACTION_PERFORMED,
+                windowEvent.toString(),
+                System.currentTimeMillis(),
+                InputEvent.BUTTON1_MASK
+        ));
     }
 
     @Override
