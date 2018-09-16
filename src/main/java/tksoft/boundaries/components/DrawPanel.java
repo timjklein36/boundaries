@@ -8,11 +8,16 @@ import java.awt.*;
 
 public class DrawPanel extends JPanel {
 
-    private Logger logger = LoggerFactory.getLogger(DrawPanel.class);
+    private static Logger logger = LoggerFactory.getLogger(DrawPanel.class);
+
+    private FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
 
     private JPanel imagePanel = new JPanel();
 
     public DrawPanel() {
         this.setBackground(new Color(45, 45, 55));
+        this.setLayout(flowLayout);
+
+        add(imagePanel);
     }
 }
