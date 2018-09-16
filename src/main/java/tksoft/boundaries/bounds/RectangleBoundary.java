@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class RectangleBoundary extends Rectangle implements Boundary {
 
-    private Color color;
+    private Color color = Color.WHITE;
 
     public RectangleBoundary(int x, int y, int width, int height) {
         super(x, y, width, height);
