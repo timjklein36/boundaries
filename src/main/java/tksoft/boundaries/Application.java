@@ -37,7 +37,7 @@ public class Application extends JFrame {
 
         add(new DrawToolBar(), BorderLayout.PAGE_START);
 
-        add(new DrawPanel());
+        add(new DrawPanel(fileChooser));
 
         // Log some system information
         String hostName = "UNKNOWN_HOST";
