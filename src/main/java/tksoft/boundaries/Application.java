@@ -3,6 +3,7 @@ package tksoft.boundaries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tksoft.boundaries.actions.Actions;
+import tksoft.boundaries.components.DrawPanel;
 import tksoft.boundaries.components.DrawToolBar;
 import tksoft.boundaries.components.MainMenuBar;
 
@@ -24,7 +25,9 @@ public class Application extends JFrame {
 
     private WindowListener windowListener = new ApplicationWindowListener();
 
-    private Actions actions = new Actions(this);
+    private JFileChooser fileChooser = new JFileChooser();
+
+    private Actions actions = new Actions(this, this.fileChooser);
 
     private void init() {
         addWindowListener(windowListener); // Adds the window listener that is implemented in this very class
@@ -33,6 +36,8 @@ public class Application extends JFrame {
         setJMenuBar(new MainMenuBar(actions));
 
         add(new DrawToolBar(), BorderLayout.PAGE_START);
+
+        add(new DrawPanel());
 
         // Log some system information
         String hostName = "UNKNOWN_HOST";
